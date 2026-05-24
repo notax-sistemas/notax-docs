@@ -1,0 +1,69 @@
+---
+id: buscar-convenio
+title: "Buscar convênio"
+description: "Retorna os detalhes de um convênio pelo ID."
+sidebar_label: "Buscar convênio"
+hide_title: true
+hide_table_of_contents: true
+api: eJztW9ty2zYQ/RUOpg9xK1uS49aJZjwe2U48mjSOx3HaB1mdQuTKQkwBDACqURX+UH+jP9ZdXiTq4ot8zxR+MbnALhZnDy5LCGNm+blhjTbbV0OQXFrWqbAAjK9FZIWSrMFOwCotuaeMF4DlYR/owYsHnq/k8N9/pFBeBKHyWgcbrMIirvkALGgyO2YSX9BIl8uLpu+rWNpWgLUEWY647eOzhi+x0BCwhtUxVJjx+zDgrDFmdhSRsrFayHOs2VN6wC1K4liQFStsSBU+joyFwSEJk6QyaVQ8cEsdsmgiJQ0YMrJZq9G/Wfg+vEN1RMoCgkstwVdbjUJOfo1LHkx9a2eOz0OWdopMZYHaVwG9dkFCT/iC69FyycEQZeco09zCHto8igdd0Cg02CI6JXg4I+a+D5El5EzTt2KYNqoBtYMmiXtCQoorxhgMSf7SwsKHXo+ir5XNhKgSCLsXo2ZMpMoRVt3P4NusZgTaigw67PEtozAP1K3NZKRZ1J6t/TETJ3OBWEFvPmK3V8XQrqC8hANT7a5SIXC5oL6Xy5NL6IIWlMTYp2M9tyXjMGQ0DHHUIUdoEPyxvvtit1H71q6vv+6cnQU/rv3ACkq0UyqdZ5TMvO2UYoaFv2wt+HWEbfBuCH/W2+1M0qJ6FS97OdZiiF3dVxp+Fd2K9xtORzgcd+o1/Kt4+3FokZg7EmKreVjxjuNuKPx3MDpVFyB3tn3wX/0cbHeBb2+/fgWdDks6yWRorATbZBStpDUdcFfxOcA661ak88KsqQMsOaWCJB+wczNMarLChjyM6X/AR6bZw2Ad4Ou1gzUrnfg1DV/hw/5kaEia7t7IeGDeohenpJAUzTauZgi+np1t4ONPa7tltsjJ/LVIlkBhIJegAb4YcCLlbE+v8WAVjr7cXGi1lUpxQboMl0Owe6NWQMic5OtIyphiZn3ymLVyT1zclsWtQKccu8lSuDx2jxCz33MPipg9Q+AKF8vAFRuHJ8PtOHPgGcOWe1hGbWaTdQPocAnDbYA/eiAM90vuPB2Qk07exf1mZuL6qJSVpqG5Vm2mKo8i3H5wyhiqn41ymYHLDFxm4DIDlxn8z3eYLjP4PuPmMgOXGbjMwGUGd88M0tMClxK4lMClBC4lcCmB21q6lOD7jJtLCVxK4FIClxLcNSWgylu1+uLvjD5JHtu+0uJvCNiNfnF0s5hevmO72V6yM+3d/RgzltvYPM5mcglvlm4mX24+8GaSfnknwvuCUEgEUfr3FJISfd8LXyujerZpoiOwhML7oY9zEQKGCzT1wdzgxMsx0zHzqZh5yRcXR0lHyaehZLbiby2u+EfKem9VLN1y7xj8rBnslnvHzOfKTLfcO0o+K0qm6/0AMJUPUOkcUvbR9aUGq/JIVIf1Kp1hrfPsEMtUxzNHWkm1OGrCEhEk6dGdHhbXsWKNQLG+tZFpVKuh8nnYV8Y2tuubW1VGN5qE7KmU47nbuMvgX4/5aKMZCe+bN6zTV+UscFha36ht1NJPcmhlwNNRlN++2ouNz/X0khibu1g2nm5aVr1jlqNf2umgB2nXxjlWbVxyBHlazw9HJ3jhe2P+tHQCGRWKgJhOqJCZMcJr4JMOk4TEX2LQI5R36Pu2FkT2FNdAGHrGkPV4aOCKrr44yT+7rXmX9SQXcjmafMFvMHy8AGx67gSTyPiIjdPpJ42SPvCATvSw61lBszgILlTKVjslRh++OUWW/wdzJFJZ
+sidebar_class_name: "get api-method"
+info_path: notax-pay/notaxpay-api-v-1
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Buscar convênio"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/api/v1/bank-accounts/{bankAccountId}/covenants/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Retorna os detalhes de um convênio pelo ID.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  {...require("./buscar-convenio.ParamsDetails.json")}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  {...require("./buscar-convenio.RequestSchema.json")}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  {...require("./buscar-convenio.StatusCodes.json")}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,43 +1,90 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
+import type { ReactNode } from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
-
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+type ApiCard = {
+  title: string;
+  description: string;
+  href: string;
+  badge: string;
+  iconPath: string;
+};
+
+const apis: ApiCard[] = [
+  {
+    title: 'Notax Pay',
+    description: 'Processe pagamentos, gerencie contas bancárias e convênios através da API de pagamentos da Notax.',
+    href: '/notax-pay',
+    badge: 'v1',
+    iconPath: '/img/icons/fin001.svg',
+  },
+];
+
+function ApiCard({ title, description, href, badge, iconPath }: ApiCard): ReactNode {
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
+    <Link to={href} className={styles.apiCard}>
+      <div className={styles.apiCardIcon}>
+        <img src={iconPath} alt={title} width={24} height={24} />
       </div>
-    </header>
+      <div className={styles.apiCardContent}>
+        <div className={styles.apiCardHeader}>
+          <h3 className={styles.apiCardTitle}>{title}</h3>
+          <span className={styles.apiCardBadge}>{badge}</span>
+        </div>
+        <p className={styles.apiCardDescription}>{description}</p>
+      </div>
+      <div className={styles.apiCardArrow}>→</div>
+    </Link>
   );
 }
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
+    <Layout title="Documentação" description="Documentação das APIs Notax">
+      <main className={styles.main}>
+        <div className={styles.hero}>
+          <div className={styles.heroInner}>
+            <span className={styles.heroBadge}>Developer Docs</span>
+            <h1 className={styles.heroTitle}>
+              Bem-vindo à documentação<br />das APIs Notax
+            </h1>
+            <p className={styles.heroSubtitle}>
+              Integre as soluções financeiras e fiscais da Notax na sua aplicação
+              com nossas APIs bem documentadas e fáceis de usar.
+            </p>
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <div className={styles.sectionInner}>
+            <h2 className={styles.sectionTitle}>APIs disponíveis</h2>
+            <div className={styles.apiGrid}>
+              {apis.map((api) => (
+                <ApiCard key={api.title} {...api} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <div className={styles.sectionInner}>
+            <div className={styles.infoGrid}>
+              <div className={styles.infoCard}>
+                <img src="/img/icons/cod007.svg" alt="REST API" width={28} height={28} className={styles.infoIcon} />
+                <h3>REST API</h3>
+                <p>Todas as APIs seguem o padrão REST com respostas em JSON e autenticação via Bearer token.</p>
+              </div>
+              <div className={styles.infoCard}>
+                <img src="/img/icons/gen005.svg" alt="OpenAPI" width={28} height={28} className={styles.infoIcon} />
+                <h3>OpenAPI 3.x</h3>
+                <p>Specs em formato OpenAPI 3.x prontas para importar no Postman, Insomnia ou gerar SDKs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </Layout>
   );

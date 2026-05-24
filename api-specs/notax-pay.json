@@ -1,0 +1,2891 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "NotaxPay.Api | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:7124/"
+    }
+  ],
+  "paths": {
+    "/api/v1/bank-accounts/{bankAccountId}/covenants": {
+      "post": {
+        "tags": [
+          "Covenant"
+        ],
+        "summary": "Cadastrar convênio",
+        "description": "Cadastra um novo convênio vinculado a uma conta bancária do cliente autenticado.",
+        "parameters": [
+          {
+            "name": "bankAccountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CovenantContextCreateCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CovenantContextCreateCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CovenantContextCreateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CovenantContextCreateResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CovenantContextCreateResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CovenantContextCreateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Covenant"
+        ],
+        "summary": "Listar convênios",
+        "description": "Retorna uma lista paginada de convênios vinculados à conta bancária informada.",
+        "parameters": [
+          {
+            "name": "bankAccountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "BankAccountId",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CovenantContextGetAllResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CovenantContextGetAllResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CovenantContextGetAllResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/bank-accounts/{bankAccountId}/covenants/{id}": {
+      "get": {
+        "tags": [
+          "Covenant"
+        ],
+        "summary": "Buscar convênio",
+        "description": "Retorna os detalhes de um convênio pelo ID.",
+        "parameters": [
+          {
+            "name": "bankAccountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CovenantContextGetByIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CovenantContextGetByIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CovenantContextGetByIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/client": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Cadastrar cliente",
+        "description": "Cria um novo cliente e retorna as credenciais de acesso (clientId e clientSecret).",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientContextCreateCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientContextCreateCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientContextCreateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientContextCreateResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientContextCreateResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientContextCreateResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/client/auth": {
+      "post": {
+        "tags": [
+          "Client"
+        ],
+        "summary": "Autenticar cliente",
+        "description": "Autentica o cliente com clientId e clientSecret e retorna um Bearer token JWT.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientContextAuthenticateCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientContextAuthenticateCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientContextAuthenticateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientContextAuthenticateResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientContextAuthenticateResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientContextAuthenticateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/covenants/{covenantId}/bank-slips": {
+      "post": {
+        "tags": [
+          "BankSlip"
+        ],
+        "summary": "Cadastrar lote de boletos",
+        "description": "Cadastra um lote de boletos vinculados ao convênio informado. Todos os itens devem passar na validação para que o lote seja salvo.",
+        "parameters": [
+          {
+            "name": "covenantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankSlipContextCreateBatchCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankSlipContextCreateBatchCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankSlipContextCreateBatchCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankSlipContextCreateBatchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankSlipContextCreateBatchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankSlipContextCreateBatchResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BankSlip"
+        ],
+        "summary": "Listar boletos",
+        "description": "Retorna uma lista paginada de boletos vinculados ao convênio informado.",
+        "parameters": [
+          {
+            "name": "covenantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "CovenantId",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankSlipContextGetAllResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankSlipContextGetAllResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankSlipContextGetAllResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/covenants/{covenantId}/bank-slips/{id}": {
+      "get": {
+        "tags": [
+          "BankSlip"
+        ],
+        "summary": "Buscar boleto",
+        "description": "Retorna os detalhes de um boleto pelo ID.",
+        "parameters": [
+          {
+            "name": "covenantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankSlipContextGetByIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankSlipContextGetByIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankSlipContextGetByIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/account-holders/{accountHolderId}/bank-accounts": {
+      "post": {
+        "tags": [
+          "BankAccount"
+        ],
+        "summary": "Cadastrar conta bancária",
+        "description": "Cadastra uma nova conta bancária vinculada a um titular de conta do cliente autenticado.",
+        "parameters": [
+          {
+            "name": "accountHolderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankAccountContextCreateCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankAccountContextCreateCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankAccountContextCreateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountContextCreateResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountContextCreateResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountContextCreateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BankAccount"
+        ],
+        "summary": "Listar contas bancárias",
+        "description": "Retorna uma lista paginada de contas bancárias vinculadas ao titular de conta.",
+        "parameters": [
+          {
+            "name": "accountHolderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "AccountHolderId",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountContextGetAllResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountContextGetAllResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountContextGetAllResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/account-holders/{accountHolderId}/bank-accounts/{id}": {
+      "get": {
+        "tags": [
+          "BankAccount"
+        ],
+        "summary": "Buscar conta bancária",
+        "description": "Retorna os detalhes de uma conta bancária pelo ID.",
+        "parameters": [
+          {
+            "name": "accountHolderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountContextGetByIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountContextGetByIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountContextGetByIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accountholder": {
+      "post": {
+        "tags": [
+          "AccountHolder"
+        ],
+        "summary": "Cadastrar titular de conta",
+        "description": "Cadastra um novo titular de conta vinculado ao cliente autenticado.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountHolderContextCreateCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountHolderContextCreateCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountHolderContextCreateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountHolderContextCreateResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountHolderContextCreateResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountHolderContextCreateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AccountHolder"
+        ],
+        "summary": "Listar titulares de conta",
+        "description": "Retorna uma lista paginada de titulares de conta vinculados ao cliente autenticado.",
+        "parameters": [
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountHolderContextGetAllResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountHolderContextGetAllResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountHolderContextGetAllResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accountholder/{id}": {
+      "get": {
+        "tags": [
+          "AccountHolder"
+        ],
+        "summary": "Buscar titular de conta",
+        "description": "Retorna os detalhes de um titular de conta pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountHolderContextGetByIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountHolderContextGetByIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountHolderContextGetByIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountHolderContextCreateCommand": {
+        "required": [
+          "name",
+          "documentNumber",
+          "documentType",
+          "email",
+          "phone",
+          "street",
+          "addressNumber",
+          "complement",
+          "neighborhood",
+          "city",
+          "state",
+          "zipCode"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "documentNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "documentType": {
+            "$ref": "#/components/schemas/SharedContextEnumsDocumentType"
+          },
+          "email": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "phone": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "street": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "addressNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "complement": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "neighborhood": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "city": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "state": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "zipCode": {
+            "$ref": "#/components/schemas/SystemString"
+          }
+        }
+      },
+      "AccountHolderContextCreateResponse": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          }
+        }
+      },
+      "AccountHolderContextGetAllResponse": {
+        "required": [
+          "items",
+          "totalCount",
+          "pageNumber",
+          "pageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[AccountHolderContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]"
+          },
+          "totalCount": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageNumber": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageSize": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "totalPages": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "hasPreviousPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "hasNextPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          }
+        }
+      },
+      "AccountHolderContextGetByIdResponse": {
+        "required": [
+          "id",
+          "name",
+          "document",
+          "documentType",
+          "email",
+          "phone",
+          "street",
+          "addressNumber",
+          "complement",
+          "neighborhood",
+          "city",
+          "state",
+          "zipCode",
+          "isActive",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "document": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "documentType": {
+            "$ref": "#/components/schemas/SharedContextEnumsDocumentType"
+          },
+          "email": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "phone": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "street": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "addressNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "complement": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "neighborhood": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "city": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "state": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "zipCode": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "isActive": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/SystemDateTime"
+          }
+        }
+      },
+      "BankAccountContextCreateCommand": {
+        "required": [
+          "bank",
+          "accountType",
+          "agencyNumber",
+          "agencyDigit",
+          "accountNumber",
+          "accountDigit",
+          "credentials"
+        ],
+        "type": "object",
+        "properties": {
+          "bank": {
+            "$ref": "#/components/schemas/BankAccountContextEnumsBankCode"
+          },
+          "accountType": {
+            "$ref": "#/components/schemas/BankAccountContextEnumsAccountType"
+          },
+          "agencyNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "agencyDigit": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "accountNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "accountDigit": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "credentials": {
+            "$ref": "#/components/schemas/SystemTextJsonJsonElement"
+          }
+        }
+      },
+      "BankAccountContextCreateResponse": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          }
+        }
+      },
+      "BankAccountContextEnumsAccountType": {
+        "type": "integer"
+      },
+      "BankAccountContextEnumsBankCode": {
+        "type": "integer"
+      },
+      "BankAccountContextGetAllResponse": {
+        "required": [
+          "items",
+          "totalCount",
+          "pageNumber",
+          "pageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[BankAccountContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]"
+          },
+          "totalCount": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageNumber": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageSize": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "totalPages": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "hasPreviousPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "hasNextPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          }
+        }
+      },
+      "BankAccountContextGetByIdResponse": {
+        "required": [
+          "id",
+          "accountHolderId",
+          "bank",
+          "agency",
+          "accountNumber",
+          "accountType",
+          "isActive",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "accountHolderId": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "bank": {
+            "$ref": "#/components/schemas/BankAccountContextEnumsBankCode"
+          },
+          "agency": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "accountNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "accountType": {
+            "$ref": "#/components/schemas/BankAccountContextEnumsAccountType"
+          },
+          "isActive": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/SystemDateTime"
+          }
+        }
+      },
+      "BankSlipContextCreateBatchBankSlipRequest": {
+        "required": [
+          "clientNumber",
+          "dueDate",
+          "issuanceDate",
+          "amount",
+          "documentKind",
+          "payer",
+          "rebate",
+          "discounts"
+        ],
+        "type": "object",
+        "properties": {
+          "clientNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "dueDate": {
+            "$ref": "#/components/schemas/SystemDateOnly"
+          },
+          "issuanceDate": {
+            "$ref": "#/components/schemas/SystemDateOnly"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "documentKind": {
+            "$ref": "#/components/schemas/BankSlipContextEnumsDocumentKind"
+          },
+          "payer": {
+            "$ref": "#/components/schemas/BankSlipContextCreateBatchPayerRequest"
+          },
+          "rebate": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "discounts": {
+            "$ref": "#/components/schemas/BankSlipContextCreateBatchDiscountsRequest"
+          },
+          "messages": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          }
+        }
+      },
+      "BankSlipContextCreateBatchCommand": {
+        "required": [
+          "bankSlips"
+        ],
+        "type": "object",
+        "properties": {
+          "bankSlips": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[BankSlipContextCreateBatchBankSlipRequest, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]"
+          }
+        }
+      },
+      "BankSlipContextCreateBatchDiscountItemRequest": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "daysBeforeDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "BankSlipContextCreateBatchDiscountsRequest": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/BankSlipContextEnumsDiscountType"
+          },
+          "one": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/BankSlipContextCreateBatchDiscountItemRequest"
+              }
+            ]
+          },
+          "two": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/BankSlipContextCreateBatchDiscountItemRequest"
+              }
+            ]
+          },
+          "three": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/BankSlipContextCreateBatchDiscountItemRequest"
+              }
+            ]
+          }
+        }
+      },
+      "BankSlipContextCreateBatchPayerRequest": {
+        "required": [
+          "name",
+          "documentNumber",
+          "documentType",
+          "street",
+          "addressNumber",
+          "complement",
+          "neighborhood",
+          "city",
+          "state",
+          "zipCode",
+          "email",
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "documentNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "documentType": {
+            "$ref": "#/components/schemas/SharedContextEnumsDocumentType"
+          },
+          "street": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "addressNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "complement": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "neighborhood": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "city": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "state": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "zipCode": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "email": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "phone": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          }
+        }
+      },
+      "BankSlipContextCreateBatchResponse": {
+        "required": [
+          "ids"
+        ],
+        "type": "object",
+        "properties": {
+          "ids": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[SystemGuid, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+          }
+        }
+      },
+      "BankSlipContextEnumsBankSlipStatus": {
+        "type": "integer"
+      },
+      "BankSlipContextEnumsDiscountType": {
+        "type": "integer"
+      },
+      "BankSlipContextEnumsDocumentKind": {
+        "type": "integer"
+      },
+      "BankSlipContextGetAllResponse": {
+        "required": [
+          "items",
+          "totalCount",
+          "pageNumber",
+          "pageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[BankSlipContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]"
+          },
+          "totalCount": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageNumber": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageSize": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "totalPages": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "hasPreviousPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "hasNextPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          }
+        }
+      },
+      "BankSlipContextGetByIdDiscountItemResponse": {
+        "required": [
+          "value",
+          "daysBeforeDue"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "daysBeforeDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "BankSlipContextGetByIdDiscountResponse": {
+        "required": [
+          "type",
+          "one",
+          "two",
+          "three"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/BankSlipContextEnumsDiscountType"
+          },
+          "one": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/BankSlipContextGetByIdDiscountItemResponse"
+              }
+            ]
+          },
+          "two": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/BankSlipContextGetByIdDiscountItemResponse"
+              }
+            ]
+          },
+          "three": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/BankSlipContextGetByIdDiscountItemResponse"
+              }
+            ]
+          }
+        }
+      },
+      "BankSlipContextGetByIdPayerResponse": {
+        "required": [
+          "name",
+          "documentNumber",
+          "documentType",
+          "street",
+          "addressNumber",
+          "complement",
+          "neighborhood",
+          "city",
+          "state",
+          "zipCode",
+          "email",
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "documentNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "documentType": {
+            "$ref": "#/components/schemas/SharedContextEnumsDocumentType"
+          },
+          "street": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "addressNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "complement": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "neighborhood": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "city": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "state": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "zipCode": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "email": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "phone": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          }
+        }
+      },
+      "BankSlipContextGetByIdResponse": {
+        "required": [
+          "id",
+          "covenantId",
+          "bankNumber",
+          "clientNumber",
+          "dueDate",
+          "issuanceDate",
+          "value",
+          "documentKind",
+          "status",
+          "payer",
+          "rebate",
+          "discount",
+          "messages",
+          "sequentialBankNumber",
+          "barCode",
+          "digitableLine",
+          "hasPdf",
+          "pixQrCode",
+          "processingError",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "covenantId": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "bankNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "clientNumber": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "dueDate": {
+            "$ref": "#/components/schemas/SystemDateOnly"
+          },
+          "issuanceDate": {
+            "$ref": "#/components/schemas/SystemDateOnly"
+          },
+          "value": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "documentKind": {
+            "$ref": "#/components/schemas/BankSlipContextEnumsDocumentKind"
+          },
+          "status": {
+            "$ref": "#/components/schemas/BankSlipContextEnumsBankSlipStatus"
+          },
+          "payer": {
+            "$ref": "#/components/schemas/BankSlipContextGetByIdPayerResponse"
+          },
+          "rebate": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "discount": {
+            "$ref": "#/components/schemas/BankSlipContextGetByIdDiscountResponse"
+          },
+          "messages": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+          },
+          "sequentialBankNumber": {
+            "$ref": "#/components/schemas/SystemInt64"
+          },
+          "barCode": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "digitableLine": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "hasPdf": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "pixQrCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "processingError": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/SystemDateTime"
+          }
+        }
+      },
+      "ClientContextAuthenticateCommand": {
+        "required": [
+          "clientId",
+          "clientSecret"
+        ],
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "clientSecret": {
+            "$ref": "#/components/schemas/SystemString"
+          }
+        }
+      },
+      "ClientContextAuthenticateResponse": {
+        "required": [
+          "accessToken",
+          "tokenType",
+          "expiresIn"
+        ],
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "tokenType": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "expiresIn": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "ClientContextCreateCommand": {
+        "required": [
+          "name",
+          "email",
+          "document",
+          "documentType"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "email": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "document": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "documentType": {
+            "$ref": "#/components/schemas/SharedContextEnumsDocumentType"
+          }
+        }
+      },
+      "ClientContextCreateResponse": {
+        "required": [
+          "clientId",
+          "clientSecret"
+        ],
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "clientSecret": {
+            "$ref": "#/components/schemas/SystemString"
+          }
+        }
+      },
+      "CovenantContextCreateCommand": {
+        "required": [
+          "name",
+          "covenantCode",
+          "beneficiaryCode",
+          "beneficiaryCodeDv",
+          "generateBankNumber",
+          "accept",
+          "sequentialBankNumber",
+          "fine",
+          "interest",
+          "writeOff",
+          "protest",
+          "creditBureau"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "covenantCode": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "beneficiaryCode": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "beneficiaryCodeDv": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "generateBankNumber": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "accept": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "sequentialBankNumber": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemInt64, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          },
+          "fine": {
+            "$ref": "#/components/schemas/CovenantContextCreateFineRequest"
+          },
+          "interest": {
+            "$ref": "#/components/schemas/CovenantContextCreateInterestRequest"
+          },
+          "writeOff": {
+            "$ref": "#/components/schemas/CovenantContextCreateWriteOffRequest"
+          },
+          "protest": {
+            "$ref": "#/components/schemas/CovenantContextCreateProtestRequest"
+          },
+          "creditBureau": {
+            "$ref": "#/components/schemas/CovenantContextCreateCreditBureauRequest"
+          }
+        }
+      },
+      "CovenantContextCreateCreditBureauRequest": {
+        "required": [
+          "type",
+          "daysAfterDue",
+          "agency"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsCreditBureauType"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "agency": {
+            "$ref": "#/components/schemas/CovenantContextEnumsCreditBureauAgency"
+          }
+        }
+      },
+      "CovenantContextCreateFineRequest": {
+        "required": [
+          "type",
+          "value",
+          "daysAfterDue"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsFineType"
+          },
+          "value": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "CovenantContextCreateInterestRequest": {
+        "required": [
+          "type",
+          "value",
+          "daysAfterDue"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsInterestType"
+          },
+          "value": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "CovenantContextCreateProtestRequest": {
+        "required": [
+          "type",
+          "daysAfterDue"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsProtestType"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "CovenantContextCreateResponse": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          }
+        }
+      },
+      "CovenantContextCreateWriteOffRequest": {
+        "required": [
+          "type",
+          "daysAfterDue"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsWriteOffType"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "CovenantContextEnumsCreditBureauAgency": {
+        "type": "integer"
+      },
+      "CovenantContextEnumsCreditBureauType": {
+        "type": "integer"
+      },
+      "CovenantContextEnumsFineType": {
+        "type": "integer"
+      },
+      "CovenantContextEnumsInterestType": {
+        "type": "integer"
+      },
+      "CovenantContextEnumsProtestType": {
+        "type": "integer"
+      },
+      "CovenantContextEnumsWriteOffType": {
+        "type": "integer"
+      },
+      "CovenantContextGetAllResponse": {
+        "required": [
+          "items",
+          "totalCount",
+          "pageNumber",
+          "pageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[CovenantContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]"
+          },
+          "totalCount": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageNumber": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageSize": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "totalPages": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "hasPreviousPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "hasNextPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          }
+        }
+      },
+      "CovenantContextGetByIdCreditBureauResponse": {
+        "required": [
+          "type",
+          "daysAfterDue",
+          "agency"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsCreditBureauType"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "agency": {
+            "$ref": "#/components/schemas/CovenantContextEnumsCreditBureauAgency"
+          }
+        }
+      },
+      "CovenantContextGetByIdFineResponse": {
+        "required": [
+          "type",
+          "value",
+          "daysAfterDue"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsFineType"
+          },
+          "value": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "CovenantContextGetByIdInterestResponse": {
+        "required": [
+          "type",
+          "value",
+          "daysAfterDue"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsInterestType"
+          },
+          "value": {
+            "$ref": "#/components/schemas/SystemDecimal"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "CovenantContextGetByIdProtestResponse": {
+        "required": [
+          "type",
+          "daysAfterDue"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsProtestType"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "CovenantContextGetByIdResponse": {
+        "required": [
+          "id",
+          "bankAccountId",
+          "name",
+          "covenantCode",
+          "beneficiaryCode",
+          "beneficiaryCodeDv",
+          "generateBankNumber",
+          "sequentialBankNumber",
+          "accept",
+          "isActive",
+          "createdAt",
+          "fine",
+          "interest",
+          "writeOff",
+          "protest",
+          "creditBureau"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "bankAccountId": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "covenantCode": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "beneficiaryCode": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "beneficiaryCodeDv": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "generateBankNumber": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "sequentialBankNumber": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemInt64, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          },
+          "accept": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "isActive": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/SystemDateTime"
+          },
+          "fine": {
+            "$ref": "#/components/schemas/CovenantContextGetByIdFineResponse"
+          },
+          "interest": {
+            "$ref": "#/components/schemas/CovenantContextGetByIdInterestResponse"
+          },
+          "writeOff": {
+            "$ref": "#/components/schemas/CovenantContextGetByIdWriteOffResponse"
+          },
+          "protest": {
+            "$ref": "#/components/schemas/CovenantContextGetByIdProtestResponse"
+          },
+          "creditBureau": {
+            "$ref": "#/components/schemas/CovenantContextGetByIdCreditBureauResponse"
+          }
+        }
+      },
+      "CovenantContextGetByIdWriteOffResponse": {
+        "required": [
+          "type",
+          "daysAfterDue"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CovenantContextEnumsWriteOffType"
+          },
+          "daysAfterDue": {
+            "$ref": "#/components/schemas/SystemInt32"
+          }
+        }
+      },
+      "MicrosoftAspNetCoreMvcProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "title": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "status": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemInt32, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          },
+          "detail": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "instance": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          }
+        }
+      },
+      "SharedContextEnumsDocumentType": {
+        "type": "integer"
+      },
+      "SystemBoolean": {
+        "type": "boolean"
+      },
+      "SystemCollectionsGenericIReadOnlyList`1[[AccountHolderContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/AccountHolderContextGetByIdResponse"
+        }
+      },
+      "SystemCollectionsGenericIReadOnlyList`1[[BankAccountContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/BankAccountContextGetByIdResponse"
+        }
+      },
+      "SystemCollectionsGenericIReadOnlyList`1[[BankSlipContextCreateBatchBankSlipRequest, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/BankSlipContextCreateBatchBankSlipRequest"
+        }
+      },
+      "SystemCollectionsGenericIReadOnlyList`1[[BankSlipContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/BankSlipContextGetByIdResponse"
+        }
+      },
+      "SystemCollectionsGenericIReadOnlyList`1[[CovenantContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/CovenantContextGetByIdResponse"
+        }
+      },
+      "SystemCollectionsGenericIReadOnlyList`1[[SystemGuid, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SystemGuid"
+        }
+      },
+      "SystemCollectionsGenericIReadOnlyList`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SystemString"
+        }
+      },
+      "SystemDateOnly": {
+        "type": "string",
+        "format": "date"
+      },
+      "SystemDateTime": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "SystemDecimal": {
+        "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+        "type": [
+          "number",
+          "string"
+        ],
+        "format": "double"
+      },
+      "SystemGuid": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "SystemInt32": {
+        "pattern": "^-?(?:0|[1-9]\\d*)$",
+        "type": [
+          "integer",
+          "string"
+        ],
+        "format": "int32"
+      },
+      "SystemInt64": {
+        "pattern": "^-?(?:0|[1-9]\\d*)$",
+        "type": [
+          "integer",
+          "string"
+        ],
+        "format": "int64"
+      },
+      "SystemNullable`1[[SystemInt32, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "pattern": "^-?(?:0|[1-9]\\d*)$",
+        "type": [
+          "integer",
+          "string"
+        ],
+        "format": "int32"
+      },
+      "SystemNullable`1[[SystemInt64, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "pattern": "^-?(?:0|[1-9]\\d*)$",
+        "type": [
+          "integer",
+          "string"
+        ],
+        "format": "int64"
+      },
+      "SystemString": {
+        "type": "string"
+      },
+      "SystemTextJsonJsonElement": {}
+    }
+  },
+  "tags": [
+    {
+      "name": "Covenant"
+    },
+    {
+      "name": "Client"
+    },
+    {
+      "name": "BankSlip"
+    },
+    {
+      "name": "BankAccount"
+    },
+    {
+      "name": "AccountHolder"
+    }
+  ]
+}

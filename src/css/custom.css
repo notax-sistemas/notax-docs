@@ -1,30 +1,244 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* You can override the default Infima variables here. */
+/* ── Notax brand tokens ───────────────────────────────────────── */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --notax-blue: #3E97FF;
+  --notax-blue-dark: #2384f5;
+  --notax-blue-darker: #1476e8;
+  --notax-blue-darkest: #0561cc;
+  --notax-blue-light: #5fa7ff;
+  --notax-blue-lighter: #80bbff;
+  --notax-blue-lightest: #a8d1ff;
+  --notax-grey: #F4F4F4;
+  --notax-grey-border: #E5E7EB;
+
+  /* Infima overrides — light mode */
+  --ifm-color-primary: #3E97FF;
+  --ifm-color-primary-dark: #2384f5;
+  --ifm-color-primary-darker: #1476e8;
+  --ifm-color-primary-darkest: #0561cc;
+  --ifm-color-primary-light: #5fa7ff;
+  --ifm-color-primary-lighter: #80bbff;
+  --ifm-color-primary-lightest: #a8d1ff;
+
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ifm-heading-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ifm-font-size-base: 15px;
+  --ifm-line-height-base: 1.65;
+  --ifm-border-radius: 8px;
+  --ifm-code-font-size: 90%;
+  --ifm-code-border-radius: 6px;
+
+  --ifm-navbar-height: 60px;
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-shadow: 0 1px 0 0 var(--notax-grey-border);
+
+  --ifm-sidebar-width: 270px;
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #fafafa;
+
+  --docusaurus-highlighted-code-line-bg: rgba(62, 151, 255, 0.07);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* ── Dark mode ──────────────────────────────────────────────── */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #3E97FF;
+  --ifm-color-primary-dark: #2384f5;
+  --ifm-color-primary-darker: #1476e8;
+  --ifm-color-primary-darkest: #0561cc;
+  --ifm-color-primary-light: #5fa7ff;
+  --ifm-color-primary-lighter: #80bbff;
+  --ifm-color-primary-lightest: #a8d1ff;
+
+  --ifm-navbar-background-color: #111111;
+  --ifm-navbar-shadow: 0 1px 0 0 rgba(255,255,255,0.08);
+  --ifm-background-color: #111111;
+  --ifm-background-surface-color: #1c1c1c;
+
+  --docusaurus-highlighted-code-line-bg: rgba(62, 151, 255, 0.12);
+}
+
+/* ── Global ──────────────────────────────────────────────────── */
+body {
+  font-family: var(--ifm-font-family-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Navbar ──────────────────────────────────────────────────── */
+.navbar {
+  border-bottom: 1px solid var(--notax-grey-border);
+  padding: 0 1.5rem;
+}
+
+[data-theme='dark'] .navbar {
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+
+.navbar__logo img {
+  height: 32px;
+  width: auto;
+}
+
+.navbar__link {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.navbar__link--active {
+  color: var(--notax-blue);
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────── */
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--notax-grey-border);
+}
+
+[data-theme='dark'] .theme-doc-sidebar-container {
+  border-right-color: rgba(255,255,255,0.08);
+}
+
+.menu__link {
+  font-size: 0.85rem;
+  font-weight: 400;
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  color: #374151;
+}
+
+[data-theme='dark'] .menu__link {
+  color: #d1d5db;
+}
+
+.menu__link:hover {
+  background: rgba(62, 151, 255, 0.08);
+  color: var(--notax-blue);
+}
+
+[data-theme='dark'] .menu__link:hover {
+  background: rgba(62, 151, 255, 0.1);
+  color: #3E97FF;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  color: var(--notax-blue);
+  font-weight: 600;
+  background: rgba(62, 151, 255, 0.1);
+}
+
+[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
+  color: #3E97FF;
+  background: rgba(62, 151, 255, 0.12);
+}
+
+.menu__caret::before {
+  border-color: #6b7280;
+}
+
+.menu__list-item-collapsible:hover {
+  background: transparent;
+}
+
+/* ── Content area ────────────────────────────────────────────── */
+article h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+[data-theme='dark'] article h1 {
+  color: #f9fafb;
+}
+
+article h2 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+article h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ── Code blocks ──────────────────────────────────────────────── */
+pre {
+  border-radius: 8px;
+  border: 1px solid var(--notax-grey-border);
+}
+
+[data-theme='dark'] pre {
+  border-color: rgba(255,255,255,0.08);
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+.footer {
+  background-color: #111111;
+  padding: 2.5rem 0 1.5rem;
+}
+
+.footer__title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 0.75rem;
+}
+
+.footer__link-item {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.875rem;
+}
+
+.footer__link-item:hover {
+  color: #ffffff;
+}
+
+.footer__copyright {
+  color: rgba(255,255,255,0.35);
+  font-size: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+/* ── Breadcrumbs ──────────────────────────────────────────────── */
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: var(--notax-blue);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
+  color: #3E97FF;
+}
+
+/* ── TOC (table of contents) ─────────────────────────────────── */
+.table-of-contents__link {
+  font-size: 0.82rem;
+}
+
+.table-of-contents__link--active {
+  color: var(--notax-blue);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  color: #3E97FF;
+}
+
+/* ── Scrollbar (webkit) ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(62, 151, 255, 0.25);
+  border-radius: 3px;
+}
+[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
 }

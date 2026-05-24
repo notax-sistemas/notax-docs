@@ -1,0 +1,1 @@
+{"parameters":[{"name":"accountHolderId","in":"path","required":true,"schema":{"type":"string","format":"uuid","title":"SystemGuid"}}]}

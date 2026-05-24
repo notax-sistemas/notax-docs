@@ -1,23 +1,256 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+.main {
+  flex: 1;
+}
 
-.heroBanner {
-  padding: 4rem 0;
+/* ── Hero ─────────────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #1a6fe8 0%, #3E97FF 100%);
+  padding: 5rem 1.5rem 4rem;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.heroInner {
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.heroBadge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.875rem;
+  margin-bottom: 1.25rem;
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.65;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 1.75rem;
+  }
+  .hero {
+    padding: 3.5rem 1.25rem 3rem;
   }
 }
 
-.buttons {
+/* ── Sections ─────────────────────────────────────────────────── */
+.section {
+  padding: 3rem 1.5rem;
+}
+
+.section:nth-child(even) {
+  background: #fafafa;
+}
+
+[data-theme='dark'] .section:nth-child(even) {
+  background: #1c1c1c;
+}
+
+.sectionInner {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+[data-theme='dark'] .sectionTitle {
+  color: #f9fafb;
+}
+
+/* ── API cards ─────────────────────────────────────────────────── */
+.apiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+
+.apiCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  background: #ffffff;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.apiCard:hover {
+  border-color: #3E97FF;
+  box-shadow: 0 4px 16px rgba(62, 151, 255, 0.15);
+  text-decoration: none;
+  color: inherit;
+}
+
+[data-theme='dark'] .apiCard {
+  background: #1c1c1c;
+  border-color: rgba(255,255,255,0.1);
+}
+
+[data-theme='dark'] .apiCard:hover {
+  border-color: #3E97FF;
+  box-shadow: 0 4px 16px rgba(62, 151, 255, 0.2);
+}
+
+.apiCardIcon {
+  width: 44px;
+  height: 44px;
+  background: rgba(62, 151, 255, 0.1);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .apiCardIcon {
+  background: rgba(62, 151, 255, 0.12);
+}
+
+/* CSS filter para #3E97FF */
+.apiCardIcon img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg) brightness(105%);
+}
+
+[data-theme='dark'] .apiCardIcon img {
+  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg) brightness(115%);
+}
+
+.apiCardContent {
+  flex: 1;
+}
+
+.apiCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.apiCardTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+  color: #111827;
+}
+
+[data-theme='dark'] .apiCardTitle {
+  color: #f9fafb;
+}
+
+.apiCardBadge {
+  background: rgba(62, 151, 255, 0.1);
+  color: #3E97FF;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  letter-spacing: 0.04em;
+}
+
+[data-theme='dark'] .apiCardBadge {
+  background: rgba(62, 151, 255, 0.15);
+  color: #3E97FF;
+}
+
+.apiCardDescription {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.apiCardArrow {
+  font-size: 1.1rem;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+/* ── Info cards ─────────────────────────────────────────────────── */
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.infoCard {
+  padding: 1.5rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+[data-theme='dark'] .infoCard {
+  background: #1c1c1c;
+  border-color: rgba(255,255,255,0.1);
+}
+
+.infoIcon {
+  margin-bottom: 0.875rem;
+  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg) brightness(105%);
+}
+
+[data-theme='dark'] .infoIcon {
+  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg) brightness(115%);
+}
+
+.infoCard h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #111827;
+}
+
+[data-theme='dark'] .infoCard h3 {
+  color: #f9fafb;
+}
+
+.infoCard p {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.55;
 }
