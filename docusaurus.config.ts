@@ -18,7 +18,7 @@ const config: Config = {
   organizationName: 'notax',
   projectName: 'notax-docs',
 
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
