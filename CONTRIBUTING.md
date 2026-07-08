@@ -45,6 +45,38 @@ npm run gen-api     # regenera a partir dos specs
 
 Para adicionar uma **nova** API, siga o passo-a-passo no [README](./README.md#adicionar-uma-nova-api).
 
+## Organização da pasta `docs/`
+
+A documentação segue o framework [Diátaxis](https://diataxis.fr/), separando conteúdo por objetivo do leitor:
+
+```
+docs/
+├── intro.mdx        # landing da documentação
+├── guias/           # conteúdo escrito à mão (tutoriais, how-to, conceitos)
+└── notax-pay/       # referência de API GERADA — não editar à mão
+```
+
+### Escrevendo um guia
+
+1. Crie um arquivo `.mdx` em `docs/guias/`. A sidebar é **autogerada** — o arquivo aparece
+   automaticamente, sem precisar editar `sidebars.ts`.
+2. Sempre inclua o frontmatter mínimo:
+
+   ```yaml
+   ---
+   id: meu-guia
+   title: Título do guia
+   sidebar_label: Rótulo curto
+   sidebar_position: 4 # controla a ordem na sidebar
+   description: Uma frase para SEO e busca.
+   ---
+   ```
+
+3. Quando `guias/` crescer, agrupe em subpastas (ex.: `guias/tutoriais/`) e adicione um
+   `_category_.json` em cada uma para definir rótulo e ordem da categoria.
+
+Não edite os arquivos em `docs/notax-pay/` — eles são regenerados a partir do spec (veja acima).
+
 ## Padrão de commits
 
 Utilize [Conventional Commits](https://www.conventionalcommits.org/pt-br/):
