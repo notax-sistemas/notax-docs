@@ -4,7 +4,7 @@
 
 /* ── Hero ─────────────────────────────────────────────────────── */
 .hero {
-  background: linear-gradient(135deg, #1a6fe8 0%, #3E97FF 100%);
+  background: linear-gradient(135deg, #1a6fe8 0%, #3e97ff 100%);
   padding: 5rem 1.5rem 4rem;
   text-align: center;
   position: relative;
@@ -15,7 +15,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.12) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 70% 50%, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -28,9 +28,9 @@
 
 .heroBadge {
   display: inline-block;
-  background: rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.9);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -51,7 +51,7 @@
 
 .heroSubtitle {
   font-size: 1.05rem;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.65;
   max-width: 560px;
   margin: 0 auto;
@@ -108,16 +108,18 @@
   align-items: center;
   gap: 1rem;
   padding: 1.25rem;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
   border-radius: 10px;
   background: #ffffff;
   color: inherit;
   text-decoration: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .apiCard:hover {
-  border-color: #3E97FF;
+  border-color: #3e97ff;
   box-shadow: 0 4px 16px rgba(62, 151, 255, 0.15);
   text-decoration: none;
   color: inherit;
@@ -125,11 +127,11 @@
 
 [data-theme='dark'] .apiCard {
   background: #1c1c1c;
-  border-color: rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 [data-theme='dark'] .apiCard:hover {
-  border-color: #3E97FF;
+  border-color: #3e97ff;
   box-shadow: 0 4px 16px rgba(62, 151, 255, 0.2);
 }
 
@@ -152,11 +154,13 @@
 .apiCardIcon img {
   width: 24px;
   height: 24px;
-  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg) brightness(105%);
+  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg)
+    brightness(105%);
 }
 
 [data-theme='dark'] .apiCardIcon img {
-  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg) brightness(115%);
+  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg)
+    brightness(115%);
 }
 
 .apiCardContent {
@@ -183,7 +187,7 @@
 
 .apiCardBadge {
   background: rgba(62, 151, 255, 0.1);
-  color: #3E97FF;
+  color: #3e97ff;
   border-radius: 4px;
   font-size: 0.68rem;
   font-weight: 700;
@@ -193,7 +197,7 @@
 
 [data-theme='dark'] .apiCardBadge {
   background: rgba(62, 151, 255, 0.15);
-  color: #3E97FF;
+  color: #3e97ff;
 }
 
 .apiCardDescription {
@@ -218,23 +222,25 @@
 
 .infoCard {
   padding: 1.5rem;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
   border-radius: 10px;
   background: #ffffff;
 }
 
 [data-theme='dark'] .infoCard {
   background: #1c1c1c;
-  border-color: rgba(255,255,255,0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .infoIcon {
   margin-bottom: 0.875rem;
-  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg) brightness(105%);
+  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg)
+    brightness(105%);
 }
 
 [data-theme='dark'] .infoIcon {
-  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg) brightness(115%);
+  filter: brightness(0) saturate(100%) invert(49%) sepia(90%) saturate(600%) hue-rotate(196deg)
+    brightness(115%);
 }
 
 .infoCard h3 {

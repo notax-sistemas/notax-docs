@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import styles from './index.module.css';
 
@@ -15,7 +14,8 @@ type ApiCard = {
 const apis: ApiCard[] = [
   {
     title: 'Notax Pay',
-    description: 'Processe pagamentos, gerencie contas bancárias e convênios através da API de pagamentos da Notax.',
+    description:
+      'Processe pagamentos, gerencie contas bancárias e convênios através da API de pagamentos da Notax.',
     href: '/notax-pay',
     badge: 'v1',
     iconPath: '/img/icons/fin001.svg',
@@ -41,7 +41,6 @@ function ApiCard({ title, description, href, badge, iconPath }: ApiCard): ReactN
 }
 
 export default function Home(): ReactNode {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout title="Documentação" description="Documentação das APIs Notax">
       <main className={styles.main}>
@@ -49,11 +48,13 @@ export default function Home(): ReactNode {
           <div className={styles.heroInner}>
             <span className={styles.heroBadge}>Developer Docs</span>
             <h1 className={styles.heroTitle}>
-              Bem-vindo à documentação<br />das APIs Notax
+              Bem-vindo à documentação
+              <br />
+              das APIs Notax
             </h1>
             <p className={styles.heroSubtitle}>
-              Integre as soluções financeiras e fiscais da Notax na sua aplicação
-              com nossas APIs bem documentadas e fáceis de usar.
+              Integre as soluções financeiras e fiscais da Notax na sua aplicação com nossas APIs
+              bem documentadas e fáceis de usar.
             </p>
           </div>
         </div>
@@ -73,14 +74,32 @@ export default function Home(): ReactNode {
           <div className={styles.sectionInner}>
             <div className={styles.infoGrid}>
               <div className={styles.infoCard}>
-                <img src="/img/icons/cod007.svg" alt="REST API" width={28} height={28} className={styles.infoIcon} />
+                <img
+                  src="/img/icons/cod007.svg"
+                  alt="REST API"
+                  width={28}
+                  height={28}
+                  className={styles.infoIcon}
+                />
                 <h3>REST API</h3>
-                <p>Todas as APIs seguem o padrão REST com respostas em JSON e autenticação via Bearer token.</p>
+                <p>
+                  Todas as APIs seguem o padrão REST com respostas em JSON e autenticação via Bearer
+                  token.
+                </p>
               </div>
               <div className={styles.infoCard}>
-                <img src="/img/icons/gen005.svg" alt="OpenAPI" width={28} height={28} className={styles.infoIcon} />
+                <img
+                  src="/img/icons/gen005.svg"
+                  alt="OpenAPI"
+                  width={28}
+                  height={28}
+                  className={styles.infoIcon}
+                />
                 <h3>OpenAPI 3.x</h3>
-                <p>Specs em formato OpenAPI 3.x prontas para importar no Postman, Insomnia ou gerar SDKs.</p>
+                <p>
+                  Specs em formato OpenAPI 3.x prontas para importar no Postman, Insomnia ou gerar
+                  SDKs.
+                </p>
               </div>
             </div>
           </div>

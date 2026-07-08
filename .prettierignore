@@ -1,0 +1,8 @@
+node_modules
+build
+.docusaurus
+package-lock.json
+
+# Documentação de API gerada — mantida sob controle manual
+docs/notax-pay
+api-specs
