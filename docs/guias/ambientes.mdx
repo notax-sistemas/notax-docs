@@ -1,0 +1,80 @@
+---
+id: ambientes
+title: Ambientes e formato de respostas
+sidebar_label: Ambientes
+sidebar_position: 3
+description: URLs base dos ambientes da Notax e o formato padrão de respostas e erros.
+---
+
+# Ambientes e formato de respostas
+
+## URLs base
+
+| Ambiente | URL                        |
+| -------- | -------------------------- |
+| Produção | `https://api.notax.com.br` |
+
+Todos os caminhos de endpoint são relativos a essa URL base. Por exemplo, o endpoint de
+autenticação fica em `https://api.notax.com.br/api/v1/client/auth`.
+
+## Formato das respostas
+
+As respostas são sempre retornadas em **JSON**. Requisições bem-sucedidas usam os códigos
+`2xx` apropriados (`200 OK`, `201 Created`, etc.).
+
+## Formato dos erros
+
+Erros seguem o padrão [Problem Details](https://datatracker.ietf.org/doc/html/rfc9457)
+descrito na [RFC 9110](https://datatracker.ietf.org/doc/html/rfc9110). Erros de negócio
+e de validação retornam a lista de ocorrências no campo `errors`:
+
+```json
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.21",
+  "title": "Validation Error",
+  "status": 422,
+  "errors": [
+    {
+      "code": "AccountHolder.DocumentInvalid",
+      "message": "O documento informado é inválido."
+    }
+  ]
+}
+```
+
+| Campo              | Descrição                              |
+| ------------------ | -------------------------------------- |
+| `type`             | URI que identifica o tipo do problema. |
+| `title`            | Resumo legível do erro.                |
+| `status`           | Código HTTP correspondente.            |
+| `errors`           | Lista de ocorrências do erro.          |
+| `errors[].code`    | Código interno que identifica o erro.  |
+| `errors[].message` | Descrição legível da ocorrência.       |
+
+### Códigos de status
+
+Cada tipo de erro é mapeado para um código HTTP e um `title` específicos:
+
+| Status | `title`               | Quando ocorre                                  |
+| ------ | --------------------- | ---------------------------------------------- |
+| `401`  | Unauthorized          | Token ausente, inválido ou expirado.           |
+| `403`  | Forbidden             | Autenticado, mas sem permissão para o recurso. |
+| `404`  | Not Found             | Recurso não encontrado.                        |
+| `409`  | Conflict              | Conflito com o estado atual do recurso.        |
+| `422`  | Validation Error      | Dados da requisição inválidos.                 |
+| `500`  | Internal Server Error | Erro inesperado no servidor.                   |
+
+Erros inesperados (`500`) não trazem o campo `errors`; em vez disso incluem um `detail`
+genérico:
+
+```json
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+  "title": "Internal Server Error",
+  "status": 500,
+  "detail": "Ocorreu um erro inesperado. Tente novamente mais tarde."
+}
+```
+
+Consulte a lista de códigos de status de cada endpoint na
+[referência da API Notax Pay](/notax-pay).

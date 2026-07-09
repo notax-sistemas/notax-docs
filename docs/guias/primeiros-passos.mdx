@@ -1,0 +1,59 @@
+---
+id: primeiros-passos
+title: Primeiros passos
+sidebar_label: Primeiros passos
+sidebar_position: 1
+description: Autentique-se e faça sua primeira requisição à API Notax Pay em poucos minutos.
+---
+
+# Primeiros passos
+
+Este guia mostra o caminho mais curto para fazer sua primeira requisição autenticada à
+**Notax Pay**: da credencial ao primeiro `200 OK`.
+
+## Pré-requisitos
+
+- Um par de credenciais **`clientId`** (UUID) e **`clientSecret`**, fornecido pela Notax.
+- Uma ferramenta para fazer requisições HTTP (`curl`, Postman, Insomnia, etc.).
+
+## 1. Obtenha um token de acesso
+
+A autenticação é feita no endpoint [`POST /api/v1/client/auth`](/notax-pay/autenticar-cliente),
+que troca suas credenciais por um **Bearer token (JWT)**.
+
+```bash
+curl -X POST https://api.notax.com.br/api/v1/client/auth \
+  -H "Content-Type: application/json" \
+  -d '{
+    "clientId": "00000000-0000-0000-0000-000000000000",
+    "clientSecret": "seu-client-secret"
+  }'
+```
+
+A resposta contém o token (`accessToken`) que você usará nas próximas requisições:
+
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "tokenType": "Bearer",
+  "expiresIn": 3600
+}
+```
+
+## 2. Faça uma requisição autenticada
+
+Envie o token no header `Authorization` de todas as chamadas seguintes. Por exemplo, para
+[listar convênios](/notax-pay/listar-convenios):
+
+```bash
+curl https://api.notax.com.br/api/v1/covenant \
+  -H "Authorization: Bearer {seu-token}"
+```
+
+Se tudo estiver certo, você recebe um `200 OK` com a resposta em JSON.
+
+## Próximos passos
+
+- [Autenticação](./autenticacao.mdx) — detalhes sobre tokens e validade.
+- [Ambientes](./ambientes.mdx) — URLs base e como isolar testes de produção.
+- [Referência da API Notax Pay](/notax-pay) — todos os endpoints disponíveis.
