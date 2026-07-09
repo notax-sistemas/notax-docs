@@ -28,16 +28,26 @@ Authorization: Bearer {seu-token}
 
 ## Formato das respostas
 
-Todas as respostas são retornadas em formato JSON. Erros seguem o padrão [RFC 7807 (Problem Details)](https://datatracker.ietf.org/doc/html/rfc7807):
+Todas as respostas são retornadas em formato JSON. Erros seguem o padrão
+[Problem Details (RFC 9110)](https://datatracker.ietf.org/doc/html/rfc9110), com a lista de
+ocorrências no campo `errors`:
 
 ```json
 {
-  "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
-  "title": "Bad Request",
-  "status": 400,
-  "detail": "Descrição do erro"
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.21",
+  "title": "Validation Error",
+  "status": 422,
+  "errors": [
+    {
+      "code": "AccountHolder.DocumentInvalid",
+      "message": "O documento informado é inválido."
+    }
+  ]
 }
 ```
+
+Consulte [Ambientes e formato de respostas](/guias/ambientes) para a lista completa de
+códigos de status.
 
 ## Suporte
 

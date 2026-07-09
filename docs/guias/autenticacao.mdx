@@ -27,6 +27,22 @@ curl -X POST https://api.notax.com.br/api/v1/client/auth \
   -d '{ "clientId": "<uuid>", "clientSecret": "<secret>" }'
 ```
 
+Em caso de sucesso, a resposta traz o token e sua validade:
+
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "tokenType": "Bearer",
+  "expiresIn": 3600
+}
+```
+
+| Campo         | Tipo     | Descrição                                              |
+| ------------- | -------- | ------------------------------------------------------ |
+| `accessToken` | `string` | Token JWT a ser enviado nas próximas requisições.      |
+| `tokenType`   | `string` | Tipo do token — sempre `Bearer`.                       |
+| `expiresIn`   | `number` | Validade do token em **segundos** (3600 = 60 minutos). |
+
 ## Usando o token
 
 Inclua o token retornado no header `Authorization` de **todas** as requisições subsequentes:
@@ -35,13 +51,16 @@ Inclua o token retornado no header `Authorization` de **todas** as requisições
 Authorization: Bearer {seu-token}
 ```
 
+O token expira após o tempo indicado em `expiresIn`. Depois disso, autentique-se novamente
+para obter um novo token.
+
 ## Boas práticas
 
 - **Nunca** exponha o `clientSecret` no front-end ou em repositórios públicos — trate-o como senha.
 - Solicite o token no back-end e reutilize-o enquanto for válido, em vez de autenticar a cada chamada.
-- Requisições sem token válido retornam `401 Unauthorized`.
+- Credenciais inválidas retornam `401 Unauthorized`; requisições com dados ausentes retornam `422`.
 
 :::tip
-Erros de autenticação seguem o padrão [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807),
-com um corpo JSON descrevendo o problema. Veja [Ambientes](./ambientes.mdx) para as URLs base.
+Erros de autenticação seguem o formato [Problem Details](./ambientes.mdx#formato-dos-erros)
+usado por toda a API. Veja [Ambientes](./ambientes.mdx) para as URLs base e os códigos de status.
 :::

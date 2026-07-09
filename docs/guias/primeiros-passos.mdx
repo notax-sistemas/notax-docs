@@ -30,7 +30,15 @@ curl -X POST https://api.notax.com.br/api/v1/client/auth \
   }'
 ```
 
-A resposta contém o token que você usará nas próximas requisições.
+A resposta contém o token (`accessToken`) que você usará nas próximas requisições:
+
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "tokenType": "Bearer",
+  "expiresIn": 3600
+}
+```
 
 ## 2. Faça uma requisição autenticada
 
