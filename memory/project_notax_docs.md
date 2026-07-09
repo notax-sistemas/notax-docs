@@ -18,7 +18,9 @@ Docusaurus 3 API docs site for notax.com.br, targeting deployment at docs.notax.
 - Blog disabled
 - `docusaurus-theme-openapi-docs` + `docusaurus-plugin-openapi-docs` for API rendering
 - Generated API docs committed to git (not gitignored) to preserve manual edits like slug overrides
-- CI build does NOT run `gen-api-docs all` — regenerate locally when spec changes: `npm run docusaurus gen-api-docs all`
+- CI build does NOT run `gen-api-docs all` — regenerate locally when spec changes: `npm run gen-api` (clean first with `npm run clean-api`)
+- **Regeneration gotcha:** `gen-api` overwrites the info page (`notaxpay-api-v-1.info.mdx`), resetting two manual edits that MUST be re-applied: `slug: /notax-pay` (the whole site + guias link here) and `sidebar_label: Visão geral` (plugin resets it to English "Introduction").
+- **Spec enrichment (kept in `api-specs/notax-pay.json`, not in the generated .NET spec):** the raw spec from the API ships with `servers: localhost:7124`, no `info.description`, no tag descriptions, no security scheme. Before regenerating we enrich via `jq`: prod server `https://api.notax.com.br`, Portuguese `info.description` + `info.contact`, **tag names renamed to Portuguese** (the plugin uses the tag `name` as the sidebar category label AND id, so this is how the menu shows "Cliente/Titular de Conta/Conta Bancária/Convênio/Boleto/Webhook" instead of English — rename in both `.tags[].name` and every `.paths[][].tags[]`) with Portuguese tag descriptions, and `bearerAuth` (HTTP JWT) security scheme — global `security` with `security: []` override on the two public endpoints (`POST /api/v1/client`, `POST /api/v1/client/auth`). Re-apply these when a fresh spec arrives. Ideally these belong in the NotaxPay.Api source.
 
 **Adding a new API:**
 

@@ -2,18 +2,1056 @@
   "openapi": "3.1.1",
   "info": {
     "title": "NotaxPay.Api | v1",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": "API de pagamentos da Notax para emissão de boletos, gestão de titulares, contas bancárias, convênios e webhooks.\n\nTodas as requisições (exceto o cadastro e a autenticação de cliente) exigem autenticação via **Bearer token (JWT)**, obtido em `POST /api/v1/client/auth`. As respostas são em JSON e os erros seguem o padrão Problem Details (RFC 9110).",
+    "contact": {
+      "name": "Notax",
+      "url": "https://notax.com.br"
+    }
   },
   "servers": [
     {
-      "url": "https://localhost:7124/"
+      "url": "https://api.notax.com.br",
+      "description": "Produção"
     }
   ],
   "paths": {
+    "/api/v1/webhook": {
+      "post": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Cadastrar webhook",
+        "description": "Cadastra um novo webhook vinculado ao cliente autenticado. O secret é retornado apenas nesta resposta e não pode ser recuperado posteriormente.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookContextCreateCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookContextCreateCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookContextCreateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextCreateResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextCreateResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextCreateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Listar webhooks",
+        "description": "Retorna uma lista paginada de webhooks vinculados ao cliente autenticado.",
+        "parameters": [
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetAllResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetAllResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetAllResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webhook/{id}": {
+      "get": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Buscar webhook",
+        "description": "Retorna os detalhes de um webhook pelo identificador.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetByIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetByIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetByIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Atualizar webhook",
+        "description": "Substitui os dados de configuração do webhook. Não rotaciona o secret.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookContextUpdateCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookContextUpdateCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookContextUpdateCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Remover webhook",
+        "description": "Remove permanentemente o webhook. Tentativas de entrega anteriores são também removidas.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webhook/{id}/enable": {
+      "patch": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Ativar webhook",
+        "description": "Marca o webhook como ativo. Eventos passam a ser entregues.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webhook/{id}/disable": {
+      "patch": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Desativar webhook",
+        "description": "Marca o webhook como inativo. Eventos deixam de ser entregues até reativação.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webhook/{id}/events": {
+      "get": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Listar eventos disparados de um webhook",
+        "description": "Retorna a lista paginada de eventos disparados para o webhook, com summary das tentativas de entrega. Filtros opcionais: status, eventType, from, to.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "WebhookId",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemInt32"
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemString"
+            }
+          },
+          {
+            "name": "EventType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemString"
+            }
+          },
+          {
+            "name": "From",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemNullable`1[[SystemDateTime, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+            }
+          },
+          {
+            "name": "To",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SystemNullable`1[[SystemDateTime, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetEventsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetEventsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetEventsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webhook/{id}/events/{eventId}": {
+      "get": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Detalhar evento de webhook",
+        "description": "Retorna detalhes de um evento de webhook (payload original e histórico completo de tentativas de entrega).",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetEventDetailsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetEventDetailsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextGetEventDetailsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webhook/{id}/events/{eventId}/resend": {
+      "post": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Reenviar evento de webhook",
+        "description": "Republica o evento no bus iniciando um novo ciclo de retentativas. Falha em 409 se o evento já foi entregue com sucesso ou está em entrega.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          },
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webhook/{id}/test": {
+      "post": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Disparar teste sintético",
+        "description": "Envia uma chamada de teste imediata ao endpoint do webhook com payload sintético. Não persiste evento nem agenda retentativas. Retorna o resultado da única tentativa.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SystemGuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookContextTestWebhookCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookContextTestWebhookCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookContextTestWebhookCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextTestWebhookResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextTestWebhookResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookContextTestWebhookResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MicrosoftAspNetCoreMvcProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/webhook/event-types": {
+      "get": {
+        "tags": [
+          "Webhook"
+        ],
+        "summary": "Listar tipos de eventos suportados",
+        "description": "Retorna o catálogo de todos os tipos de eventos que podem ser assinados em um webhook (ex.: boleto.created, payment.completed).",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyCollection`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyCollection`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyCollection`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/bank-accounts/{bankAccountId}/covenants": {
       "post": {
         "tags": [
-          "Covenant"
+          "Convênio"
         ],
         "summary": "Cadastrar convênio",
         "description": "Cadastra um novo convênio vinculado a uma conta bancária do cliente autenticado.",
@@ -132,7 +1170,7 @@
       },
       "get": {
         "tags": [
-          "Covenant"
+          "Convênio"
         ],
         "summary": "Listar convênios",
         "description": "Retorna uma lista paginada de convênios vinculados à conta bancária informada.",
@@ -254,7 +1292,7 @@
     "/api/v1/bank-accounts/{bankAccountId}/covenants/{id}": {
       "get": {
         "tags": [
-          "Covenant"
+          "Convênio"
         ],
         "summary": "Buscar convênio",
         "description": "Retorna os detalhes de um convênio pelo ID.",
@@ -343,7 +1381,7 @@
     "/api/v1/client": {
       "post": {
         "tags": [
-          "Client"
+          "Cliente"
         ],
         "summary": "Cadastrar cliente",
         "description": "Cria um novo cliente e retorna as credenciais de acesso (clientId e clientSecret).",
@@ -428,13 +1466,14 @@
               }
             }
           }
-        }
+        },
+        "security": []
       }
     },
     "/api/v1/client/auth": {
       "post": {
         "tags": [
-          "Client"
+          "Cliente"
         ],
         "summary": "Autenticar cliente",
         "description": "Autentica o cliente com clientId e clientSecret e retorna um Bearer token JWT.",
@@ -519,13 +1558,14 @@
               }
             }
           }
-        }
+        },
+        "security": []
       }
     },
     "/api/v1/covenants/{covenantId}/bank-slips": {
       "post": {
         "tags": [
-          "BankSlip"
+          "Boleto"
         ],
         "summary": "Cadastrar lote de boletos",
         "description": "Cadastra um lote de boletos vinculados ao convênio informado. Todos os itens devem passar na validação para que o lote seja salvo.",
@@ -644,7 +1684,7 @@
       },
       "get": {
         "tags": [
-          "BankSlip"
+          "Boleto"
         ],
         "summary": "Listar boletos",
         "description": "Retorna uma lista paginada de boletos vinculados ao convênio informado.",
@@ -766,7 +1806,7 @@
     "/api/v1/covenants/{covenantId}/bank-slips/{id}": {
       "get": {
         "tags": [
-          "BankSlip"
+          "Boleto"
         ],
         "summary": "Buscar boleto",
         "description": "Retorna os detalhes de um boleto pelo ID.",
@@ -855,7 +1895,7 @@
     "/api/v1/account-holders/{accountHolderId}/bank-accounts": {
       "post": {
         "tags": [
-          "BankAccount"
+          "Conta Bancária"
         ],
         "summary": "Cadastrar conta bancária",
         "description": "Cadastra uma nova conta bancária vinculada a um titular de conta do cliente autenticado.",
@@ -994,7 +2034,7 @@
       },
       "get": {
         "tags": [
-          "BankAccount"
+          "Conta Bancária"
         ],
         "summary": "Listar contas bancárias",
         "description": "Retorna uma lista paginada de contas bancárias vinculadas ao titular de conta.",
@@ -1116,7 +2156,7 @@
     "/api/v1/account-holders/{accountHolderId}/bank-accounts/{id}": {
       "get": {
         "tags": [
-          "BankAccount"
+          "Conta Bancária"
         ],
         "summary": "Buscar conta bancária",
         "description": "Retorna os detalhes de uma conta bancária pelo ID.",
@@ -1205,7 +2245,7 @@
     "/api/v1/accountholder": {
       "post": {
         "tags": [
-          "AccountHolder"
+          "Titular de Conta"
         ],
         "summary": "Cadastrar titular de conta",
         "description": "Cadastra um novo titular de conta vinculado ao cliente autenticado.",
@@ -1314,7 +2354,7 @@
       },
       "get": {
         "tags": [
-          "AccountHolder"
+          "Titular de Conta"
         ],
         "summary": "Listar titulares de conta",
         "description": "Retorna uma lista paginada de titulares de conta vinculados ao cliente autenticado.",
@@ -1401,7 +2441,7 @@
     "/api/v1/accountholder/{id}": {
       "get": {
         "tags": [
-          "AccountHolder"
+          "Titular de Conta"
         ],
         "summary": "Buscar titular de conta",
         "description": "Retorna os detalhes de um titular de conta pelo ID.",
@@ -2771,6 +3811,12 @@
       "SystemBoolean": {
         "type": "boolean"
       },
+      "SystemCollectionsGenericIReadOnlyCollection`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SystemString"
+        }
+      },
       "SystemCollectionsGenericIReadOnlyList`1[[AccountHolderContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]": {
         "type": "array",
         "items": {
@@ -2813,6 +3859,24 @@
           "$ref": "#/components/schemas/SystemString"
         }
       },
+      "SystemCollectionsGenericIReadOnlyList`1[[WebhookContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/WebhookContextGetByIdResponse"
+        }
+      },
+      "SystemCollectionsGenericIReadOnlyList`1[[WebhookContextGetEventDetailsAttemptItem, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/WebhookContextGetEventDetailsAttemptItem"
+        }
+      },
+      "SystemCollectionsGenericIReadOnlyList`1[[WebhookContextGetEventsEventListItem, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/WebhookContextGetEventsEventListItem"
+        }
+      },
       "SystemDateOnly": {
         "type": "string",
         "format": "date"
@@ -2849,6 +3913,10 @@
         ],
         "format": "int64"
       },
+      "SystemNullable`1[[SystemDateTime, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "string",
+        "format": "date-time"
+      },
       "SystemNullable`1[[SystemInt32, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
         "pattern": "^-?(?:0|[1-9]\\d*)$",
         "type": [
@@ -2868,24 +3936,465 @@
       "SystemString": {
         "type": "string"
       },
-      "SystemTextJsonJsonElement": {}
+      "SystemTextJsonJsonElement": {},
+      "WebhookContextCreateCommand": {
+        "required": [
+          "name",
+          "endpoint",
+          "events",
+          "environment"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "endpoint": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "events": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+          },
+          "environment": {
+            "$ref": "#/components/schemas/SystemString"
+          }
+        }
+      },
+      "WebhookContextCreateResponse": {
+        "required": [
+          "id",
+          "secret",
+          "createdAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "secret": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/SystemDateTime"
+          }
+        }
+      },
+      "WebhookContextGetAllResponse": {
+        "required": [
+          "items",
+          "totalCount",
+          "pageNumber",
+          "pageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[WebhookContextGetByIdResponse, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]"
+          },
+          "totalCount": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageNumber": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageSize": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "totalPages": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "hasPreviousPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "hasNextPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          }
+        }
+      },
+      "WebhookContextGetByIdResponse": {
+        "required": [
+          "id",
+          "name",
+          "endpoint",
+          "events",
+          "environment",
+          "isActive",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "endpoint": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "events": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+          },
+          "environment": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "isActive": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/SystemDateTime"
+          },
+          "updatedAt": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemDateTime, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          }
+        }
+      },
+      "WebhookContextGetEventDetailsAttemptItem": {
+        "required": [
+          "id",
+          "attemptNumber",
+          "status",
+          "statusCode",
+          "responseBody",
+          "durationMs",
+          "error",
+          "requestedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "attemptNumber": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "statusCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemInt32, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          },
+          "responseBody": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "durationMs": {
+            "$ref": "#/components/schemas/SystemInt64"
+          },
+          "error": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "requestedAt": {
+            "$ref": "#/components/schemas/SystemDateTime"
+          }
+        }
+      },
+      "WebhookContextGetEventDetailsResponse": {
+        "required": [
+          "id",
+          "webhookId",
+          "eventType",
+          "status",
+          "createdAt",
+          "dispatchedAt",
+          "payload",
+          "attempts"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "webhookId": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "eventType": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/SystemDateTime"
+          },
+          "dispatchedAt": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemDateTime, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "attempts": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[WebhookContextGetEventDetailsAttemptItem, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]"
+          }
+        }
+      },
+      "WebhookContextGetEventsEventListItem": {
+        "required": [
+          "id",
+          "eventType",
+          "status",
+          "createdAt",
+          "dispatchedAt",
+          "attemptCount",
+          "lastAttemptStatus",
+          "lastAttemptStatusCode",
+          "lastAttemptAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "eventType": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/SystemDateTime"
+          },
+          "dispatchedAt": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemDateTime, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          },
+          "attemptCount": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "lastAttemptStatus": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "lastAttemptStatusCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemInt32, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          },
+          "lastAttemptAt": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemDateTime, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          }
+        }
+      },
+      "WebhookContextGetEventsResponse": {
+        "required": [
+          "items",
+          "totalCount",
+          "pageNumber",
+          "pageSize"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[WebhookContextGetEventsEventListItem, NotaxPayApplication, Version=1000, Culture=neutral, PublicKeyToken=null]]"
+          },
+          "totalCount": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageNumber": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "pageSize": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "totalPages": {
+            "$ref": "#/components/schemas/SystemInt32"
+          },
+          "hasPreviousPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "hasNextPage": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          }
+        }
+      },
+      "WebhookContextTestWebhookCommand": {
+        "required": [
+          "webhookId",
+          "eventType"
+        ],
+        "type": "object",
+        "properties": {
+          "webhookId": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "eventType": {
+            "$ref": "#/components/schemas/SystemString"
+          }
+        }
+      },
+      "WebhookContextTestWebhookResponse": {
+        "required": [
+          "success",
+          "statusCode",
+          "responseBody",
+          "durationMs",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "success": {
+            "$ref": "#/components/schemas/SystemBoolean"
+          },
+          "statusCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemNullable`1[[SystemInt32, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+              }
+            ]
+          },
+          "responseBody": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          },
+          "durationMs": {
+            "$ref": "#/components/schemas/SystemInt64"
+          },
+          "error": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SystemString"
+              }
+            ]
+          }
+        }
+      },
+      "WebhookContextUpdateCommand": {
+        "required": [
+          "id",
+          "name",
+          "endpoint",
+          "events",
+          "environment"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SystemGuid"
+          },
+          "name": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "endpoint": {
+            "$ref": "#/components/schemas/SystemString"
+          },
+          "events": {
+            "$ref": "#/components/schemas/SystemCollectionsGenericIReadOnlyList`1[[SystemString, SystemPrivateCoreLib, Version=10000, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+          },
+          "environment": {
+            "$ref": "#/components/schemas/SystemString"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Bearer token JWT obtido em POST /api/v1/client/auth."
+      }
     }
   },
   "tags": [
     {
-      "name": "Covenant"
+      "name": "Cliente",
+      "description": "Cadastro e autenticação de clientes da API. É aqui que você obtém suas credenciais e o Bearer token de acesso."
     },
     {
-      "name": "Client"
+      "name": "Titular de Conta",
+      "description": "Titulares de conta (pessoas físicas ou jurídicas) que possuem as contas bancárias utilizadas nas cobranças."
     },
     {
-      "name": "BankSlip"
+      "name": "Conta Bancária",
+      "description": "Contas bancárias vinculadas a um titular, que servem de base para os convênios de cobrança."
     },
     {
-      "name": "BankAccount"
+      "name": "Convênio",
+      "description": "Convênios de cobrança vinculados a uma conta bancária, usados para a emissão de boletos."
     },
     {
-      "name": "AccountHolder"
+      "name": "Boleto",
+      "description": "Emissão e consulta de boletos bancários, cadastrados em lote a partir de um convênio."
+    },
+    {
+      "name": "Webhook",
+      "description": "Webhooks para receber notificações de eventos (como atualizações de boletos) em tempo real, com cadastro, ativação, teste e reenvio de eventos."
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
     }
   ]
 }
