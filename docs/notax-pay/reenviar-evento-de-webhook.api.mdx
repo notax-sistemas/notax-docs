@@ -1,0 +1,69 @@
+---
+id: reenviar-evento-de-webhook
+title: "Reenviar evento de webhook"
+description: "Republica o evento no bus iniciando um novo ciclo de retentativas. Falha em 409 se o evento já foi entregue com sucesso ou está em entrega."
+sidebar_label: "Reenviar evento de webhook"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWV9PIzcQ/yojqw+AcvlzvYojEjqlVFRcexAB13sIqfDuThLDrr1ne1PSXD7MqQ+V+t5PwBfrjHcDCendE63ysAiJtT2eGf/mNx6LmQsvx050B+IDRhNjbsWwIRJ0sVW5V0aLrjjHvIhSFUswgFPU3oA2EBUOlFaxkjoxUGQ0NzUQqzg1kCBY9CQpvZpK14RjmU4kYAav2gfg8FHRzf1nGBkFNLA4LhBik4ErYnTOgCkAnScJ2lgKyKZoiFxamZF6y27PhaYBeakSWlLsby79hL4tfiyUxUR0vS2wIVw8wUyK7lz4Wc47nLdKj0lyZGwmPc0URdDilU9Z4GLmPGY/8uRi0XiwFFw/+Y/NDVmjy4126FjJy/Yr/rMemVMDR0Yz0GLREK/anU2R91oWfmKs+h3ZVlyJs1t451t5KvkQ8013TXSDsWe4rcnRelX6Ua7OhdF4Ngr4V/K6SFPBKD097vrxLsrpxXDxsPI8yhyRrXBf10ahItowLL++eLPzptv+NOi8OBheXSV7u9+w9iA/oLh6HKMVjaXh4UrUaPHblxuunJINGaV43RkMypkTlmtAOehbSgSPR8bizypqwC/EXgrQYadNPw04KlJfWDzUWHgr0wb0Q8b9hLNLc4v6cD/G+PV3yX6Ecn//4DUOh+WhE/RSpc8FodIEoo6fKSSPARbvVGyNMyPfc/kpekbh3TTuW0OAZT+EMzhOMSHznC8a5m7rxpmamTUzt4SZ4basKVlTclsouQgV/18fBR6OTaHrcl8zeKsZXJf7mpnbysy63NeU3CpKluX+YLPcHxk9Ijh8Xe1rAm8zgetqXzNzW5lZV/uakltFyVDuM/QTk9Cm3LhAP240dEVL5qo17bR+K/s1rblKFq3Qk3CtedWbWLQsOgz/AnBop8tWSWEJITHxPnfdFutpauPlXTM2WTPiIK8/LcitpLj/8/4PI7gf4TAurPKzoIrwt2h7Bbs0GK4uX3D+lCmyKvQAF5sXVX+Ex6UQzZQfx0t2vf1wueHR90EEPFMBSABM5FViuEHUP7u4hCU2caoIhxa3Ppohw5UemeBDFYdTPndfzpq9XMEnmHbI1LRkIq12mu1me8N4r3/Cna1cjmXGzSsHiYSgCLglRU4o5wgsFopMiiTRgDF3sMo5sl2k5D/N8ktNOoiIY/efrZLl1PT+L61ILUIVW9e80lf60iQkS7+hxeQUReRvdLCDdzHZAAOxJAFvCQaQQGcm56jOhsCx3RIM3AW8U2NC6onEVEnY21tDdoeg3d3ba6zAe/0lfK+b0GPXHLOUnAwI0Ia3F2en5BAfxxLlwXF7LyNvc5lYlqlIDxXrYef8+AgOOp32brN6y8o4vGWrtltAmlbWSbxGYI40u5FJvbLxHFHTIe2y55g84Ps0xPPHJ/TWdT2r7Fl52C8qLObVzTCgF5ZiHjOZH0/YDU3G8oLg4WP7srojKHcnfMOQgvk8kg7f23Sx4OmPBVpOd/qcSqJpxLlDyZ8ox990N41k6vArKO6cV23RXfjSGapJqWfsu0wLHtHnLc5EaOvyVfs/WlziEwrBBGVClxMfulztxTHmfmXfqurhyqXN+UKE/AcaJ8yM
+sidebar_class_name: "post api-method"
+info_path: notax-pay/notaxpay-api-v-1
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Reenviar evento de webhook"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/api/v1/webhook/{id}/events/{eventId}/resend"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Republica o evento no bus iniciando um novo ciclo de retentativas. Falha em 409 se o evento já foi entregue com sucesso ou está em entrega.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  {...require("./reenviar-evento-de-webhook.ParamsDetails.json")}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  {...require("./reenviar-evento-de-webhook.RequestSchema.json")}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  {...require("./reenviar-evento-de-webhook.StatusCodes.json")}
+>
+  
+</StatusCodes>
+
+
+      

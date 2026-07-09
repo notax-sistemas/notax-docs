@@ -15,7 +15,7 @@ const apis: ApiCard[] = [
   {
     title: 'Notax Pay',
     description:
-      'Processe pagamentos, gerencie contas bancárias e convênios através da API de pagamentos da Notax.',
+      'Emita boletos, gerencie titulares, contas bancárias, convênios e webhooks através da API de pagamentos da Notax.',
     href: '/notax-pay',
     badge: 'v1',
     iconPath: '/img/icons/fin001.svg',
